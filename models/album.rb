@@ -1,4 +1,5 @@
 require('pg')
+require('pry-byebug')
 
 require_relative('../db/sql_runner.rb')
 require_relative('album.rb')
@@ -48,31 +49,12 @@ class Album
      return album
    end
 
-   def album_by_artist(id)
+   def self.album_by_artist(id)
      sql = "SELECT * FROM albums WHERE artist_id = $1"
      values = [id]
-     result = SqlRunner.run(sql, values)
-     album = result.map { |album| Album.new(album) }
-     return album
+     albums = SqlRunner.run(sql, values)
+     return albums.map{ |album| Album.new(album) }
    end
-
-   # def self.find_album_by_artist_id(artist_id)
-   #   sql = "SELECT * FROM albums WHERE artist_id = $1"
-   #   values = [artist_id]
-   #   result = SqlRunner.run(sql, values)
-   #   album_hash = result.first
-   #   album = Album.new(album_hash)
-   #   return album
-   # end
-
-   # def self.find_by_artist(name)
-   #   sql = "SELECT * FROM albums WHERE name = $1"
-   #   values = [name]
-   #   result = SqlRunner.run(sql, values)
-   #   album_hash = result.first
-   #   album = Album.new(album_hash)
-   #   return album
-   # end
 
    def update()
      sql = "
