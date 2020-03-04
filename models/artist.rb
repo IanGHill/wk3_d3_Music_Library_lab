@@ -53,17 +53,6 @@ class Artist
      return artist
    end
 
-
-
-   # def self.find_artist_id(artist_name)
-   #   sql = "SELECT * FROM artists WHERE name = $1"
-   #   values = [artist_name]
-   #   result = SqlRunner.run(sql, values)
-   #   artist_hash = result.first
-   #   artist = Artist.new(artist_hash)
-   #   return artist
-   # end
-
    def update()
      sql = "
      UPDATE artists SET
